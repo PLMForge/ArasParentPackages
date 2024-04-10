@@ -1,0 +1,116 @@
+﻿<AML>
+ <Item type="Method" id="AA6F547051514EF79CDDA1860751F84C" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[Innovator inn = this.getInnovator();
+
+//Get list of itemtypes to search on
+string itemtypeValue = this.getProperty("itemtype", "");
+string itemtypeCondition = this.getPropertyCondition("itemtype", "");
+
+List<string> defaultItemTypes = new List<string>{"Action", "CommandBarSection", "Form", "Grid", "ItemType", "Life Cycle Map", "List", "Method", "Permission", "RelationshipType", "Report", "Sequence", "SQL", "Workflow Map", "Revision"};
+
+Item itemTypeQuery = inn.newItem("ItemType", "get");
+itemTypeQuery.setAttribute("select", "name");
+
+if (itemtypeValue != "") {
+    itemTypeQuery.setProperty("name", itemtypeValue);
+}
+else {
+    Item orLogic = itemTypeQuery.newOR();
+    foreach(string itemType in defaultItemTypes) {
+        orLogic.setProperty("name", itemType);
+    }
+}
+if (itemtypeCondition != "") {
+    itemTypeQuery.setPropertyCondition("name", itemtypeCondition);
+}
+
+itemTypeQuery = itemTypeQuery.apply();
+
+//Get non hidden properties to set select attribute
+Item selectPropItems = inn.newItem("Property", "get");
+selectPropItems.setAttribute("select", "name");
+selectPropItems.setProperty("source_id", "CE19FF698B324D81A2F45D6F6946E004");
+selectPropItems.setProperty("is_hidden", "0");
+
+selectPropItems = selectPropItems.apply();
+
+StringBuilder selectPropString = new StringBuilder("");
+
+for (int k=0; k < selectPropItems.getItemCount(); k++) {
+    string propItemName = selectPropItems.getItemByIndex(k).getProperty("name", "");
+    selectPropString.Append($"{propItemName},");
+}
+selectPropString.Append(",config_id");
+
+//Build the result from all set ItemTypes
+StringBuilder finalResultString = new StringBuilder("<Result>");
+
+for (int i=0; i < itemTypeQuery.getItemCount(); i++) {
+    string itemName = itemTypeQuery.getItemByIndex(i).getProperty("name");
+    this.setAttribute("type", itemName);
+    this.setAttribute("select", selectPropString.ToString());
+    this.setAction("get");
+    Item itemTypeResult = this.apply();
+    if (itemTypeResult.getItemCount() > 1) {
+        for (int j=0; j < itemTypeResult.getItemCount(); j++) {
+            Item itemNodeResult = itemTypeResult.getItemByIndex(j);
+            
+            //Get parent package
+            string tableName = itemName.Replace(" ", "_");
+            string confID = itemNodeResult.getProperty("config_id", itemNodeResult.getID());
+            
+            Item pkgResult = inn.applySQL(
+                    $"SELECT MAX(pd.id) AS packageid, MAX(pd.name) AS packagename " +
+                    $"FROM innovator.[{tableName}] AS tb " +
+                    $"LEFT JOIN innovator.[PackageElement] pe ON tb.id = pe.element_id " +
+                    $"LEFT JOIN innovator.[PackageGroup] pg ON pe.source_id = pg.id " +
+                    $"LEFT JOIN innovator.[PackageDefinition] pd ON pg.source_id = pd.id " +
+                    $"WHERE tb.config_id='{confID}' " +
+                    $"GROUP BY tb.config_id");
+                    
+            if (pkgResult.getItemCount() == 1) {
+                string pkgName = pkgResult.getProperty("packagename");
+                string pkgID = pkgResult.getProperty("packageid");
+                itemNodeResult.setProperty("package_definition_name", pkgID);
+                itemNodeResult.setPropertyAttribute("package_definition_name", "keyed_name", pkgName);
+            }
+
+            itemNodeResult.setProperty("itemtype", itemName);
+            finalResultString.Append(itemNodeResult.node.OuterXml);
+        }
+    }
+    else if (itemTypeResult.getItemCount() == 1) {
+        string tableName = itemName.Replace(" ", "_");
+        string confID = itemTypeResult.getProperty("config_id", itemTypeResult.getID());
+        
+        Item pkgResult = inn.applySQL(
+                $"SELECT MAX(pd.id) AS packageid, MAX(pd.name) AS packagename " +
+                $"FROM innovator.[{tableName}] AS tb " +
+                $"LEFT JOIN innovator.[PackageElement] pe ON tb.id = pe.element_id " +
+                $"LEFT JOIN innovator.[PackageGroup] pg ON pe.source_id = pg.id " +
+                $"LEFT JOIN innovator.[PackageDefinition] pd ON pg.source_id = pd.id " +
+                $"WHERE tb.config_id='{confID}' " +
+                $"GROUP BY tb.config_id");
+                
+        if (pkgResult.getItemCount() == 1) {
+            string pkgName = pkgResult.getProperty("packagename");
+            string pkgID = pkgResult.getProperty("packageid");
+            itemTypeResult.setProperty("package_definition_name", pkgID);
+            itemTypeResult.setPropertyAttribute("package_definition_name", "keyed_name", pkgName);
+        }
+        itemTypeResult.setProperty("itemtype", itemName);
+        finalResultString.Append(itemTypeResult.node.OuterXml);
+    }
+}
+
+finalResultString.Append("</Result>");
+
+Item itemListResult = inn.newItem();
+itemListResult.loadAML(finalResultString.ToString());
+
+return itemListResult;]]></method_code>
+  <method_type>C#</method_type>
+  <name>FRG_ParentPackage_OnGet</name>
+ </Item>
+</AML>

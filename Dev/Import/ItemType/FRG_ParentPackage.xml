@@ -1,0 +1,206 @@
+﻿<AML>
+ <Item type="ItemType" id="CE19FF698B324D81A2F45D6F6946E004" action="add">
+  <allow_private_permission>1</allow_private_permission>
+  <auto_search>0</auto_search>
+  <enforce_discovery>1</enforce_discovery>
+  <hide_where_used>0</hide_where_used>
+  <implementation_type>federated</implementation_type>
+  <instance_data>FRG_PARENTPACKAGE</instance_data>
+  <is_dependent>0</is_dependent>
+  <is_relationship>0</is_relationship>
+  <is_versionable>0</is_versionable>
+  <label xml:lang="en">Parent Package</label>
+  <label_plural xml:lang="en">Parent Packages</label_plural>
+  <revisions keyed_name="Default" type="Revision">7FE395DD8B9F4E1090756A34B733D75E</revisions>
+  <show_parameters_tab>1</show_parameters_tab>
+  <structure_view>tabs off</structure_view>
+  <unlock_on_logout>0</unlock_on_logout>
+  <use_src_access>0</use_src_access>
+  <name>FRG_ParentPackage</name>
+  <Relationships>
+   <Item type="ITPresentationConfiguration" id="0D52CC5CD39AB3126B77D6069BFA2DFF" action="add">
+    <client>js</client>
+    <related_id keyed_name="FRG_ParentPackage_TOC_Configuration" type="PresentationConfiguration">0D52CC5CD39AB31236326AA7318BB90D</related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="FRG_ParentPackage" type="ItemType" name="FRG_ParentPackage">CE19FF698B324D81A2F45D6F6946E004</source_id>
+   </Item>
+   <Item type="Property" id="D0A505679D864B178C7E02CF2E6E6433" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>300</column_width>
+    <data_source keyed_name="PackageDefinition" type="ItemType" name="PackageDefinition">F312562D6AD948DCBCCCCF6A615EE0EA</data_source>
+    <data_type>item</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Parent Package</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>3328</sort_order>
+    <source_id keyed_name="FRG_ParentPackage" type="ItemType" name="FRG_ParentPackage">CE19FF698B324D81A2F45D6F6946E004</source_id>
+    <track_history>0</track_history>
+    <name>package_definition_name</name>
+   </Item>
+   <Item type="Server Event" id="4C7C02A7A2314DB59DEE5F5A1C6A1A8D" action="add">
+    <event_version>version_1</event_version>
+    <is_required>0</is_required>
+    <related_id keyed_name="FRG_ParentPackage_OnGet" type="Method">
+     <Item type="Method" action="get" select="id">
+      <name>FRG_ParentPackage_OnGet</name>
+     </Item>
+    </related_id>
+    <server_event>onGet</server_event>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="FRG_ParentPackage" type="ItemType" name="FRG_ParentPackage">CE19FF698B324D81A2F45D6F6946E004</source_id>
+   </Item>
+   <Item type="TOC Access" id="A603B7797DB14030B566DC3BC20D724F" action="add">
+    <related_id keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="FRG_ParentPackage" type="ItemType" name="FRG_ParentPackage">CE19FF698B324D81A2F45D6F6946E004</source_id>
+    <category>Administration</category>
+   </Item>
+  </Relationships>
+ </Item>
+ <Item type="ItemType" id="CE19FF698B324D81A2F45D6F6946E004" action="edit">
+  <Relationships>
+   <Item type="Property" action="edit" where="source_id='CE19FF698B324D81A2F45D6F6946E004' and name='created_by_id'">
+    <column_alignment>left</column_alignment>
+    <column_width>150</column_width>
+    <data_source keyed_name="User" type="ItemType" name="User">45E899CD2859442982EB22BB2DF683E5</data_source>
+    <data_type>item</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>1</is_required>
+    <item_behavior>float</item_behavior>
+    <label xml:lang="en">Created By</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>768</sort_order>
+    <source_id keyed_name="FRG_ParentPackage" type="ItemType" name="FRG_ParentPackage">CE19FF698B324D81A2F45D6F6946E004</source_id>
+    <track_history>0</track_history>
+    <name>created_by_id</name>
+   </Item>
+   <Item type="Property" action="edit" where="source_id='CE19FF698B324D81A2F45D6F6946E004' and name='created_on'">
+    <column_alignment>left</column_alignment>
+    <column_width>150</column_width>
+    <data_type>date</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>1</is_required>
+    <label xml:lang="en">Created On</label>
+    <pattern>short_date_time</pattern>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>640</sort_order>
+    <source_id keyed_name="FRG_ParentPackage" type="ItemType" name="FRG_ParentPackage">CE19FF698B324D81A2F45D6F6946E004</source_id>
+    <track_history>0</track_history>
+    <name>created_on</name>
+   </Item>
+   <Item type="Property" action="edit" where="source_id='CE19FF698B324D81A2F45D6F6946E004' and name='itemtype'">
+    <column_alignment>left</column_alignment>
+    <data_type>string</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Item Type</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="FRG_ParentPackage" type="ItemType" name="FRG_ParentPackage">CE19FF698B324D81A2F45D6F6946E004</source_id>
+    <stored_length>256</stored_length>
+    <track_history>0</track_history>
+    <name>itemtype</name>
+   </Item>
+   <Item type="Property" action="edit" where="source_id='CE19FF698B324D81A2F45D6F6946E004' and name='keyed_name'">
+    <column_alignment>left</column_alignment>
+    <column_width>300</column_width>
+    <data_type>string</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Name</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="FRG_ParentPackage" type="ItemType" name="FRG_ParentPackage">CE19FF698B324D81A2F45D6F6946E004</source_id>
+    <stored_length>128</stored_length>
+    <track_history>0</track_history>
+    <name>keyed_name</name>
+   </Item>
+   <Item type="Property" action="edit" where="source_id='CE19FF698B324D81A2F45D6F6946E004' and name='managed_by_id'">
+    <column_alignment>left</column_alignment>
+    <data_source keyed_name="Identity" type="ItemType" name="Identity">E582AB17663F4EF28460015B2BE9E094</data_source>
+    <data_type>item</data_type>
+    <is_hidden>1</is_hidden>
+    <is_hidden2>1</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <item_behavior>float</item_behavior>
+    <label xml:lang="en" />
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>1080</sort_order>
+    <source_id keyed_name="FRG_ParentPackage" type="ItemType" name="FRG_ParentPackage">CE19FF698B324D81A2F45D6F6946E004</source_id>
+    <track_history>0</track_history>
+    <name>managed_by_id</name>
+   </Item>
+   <Item type="Property" action="edit" where="source_id='CE19FF698B324D81A2F45D6F6946E004' and name='modified_by_id'">
+    <column_alignment>left</column_alignment>
+    <column_width>150</column_width>
+    <data_source keyed_name="User" type="ItemType" name="User">45E899CD2859442982EB22BB2DF683E5</data_source>
+    <data_type>item</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <item_behavior>float</item_behavior>
+    <label xml:lang="en">Modified By</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>1280</sort_order>
+    <source_id keyed_name="FRG_ParentPackage" type="ItemType" name="FRG_ParentPackage">CE19FF698B324D81A2F45D6F6946E004</source_id>
+    <track_history>0</track_history>
+    <name>modified_by_id</name>
+   </Item>
+   <Item type="Property" action="edit" where="source_id='CE19FF698B324D81A2F45D6F6946E004' and name='modified_on'">
+    <column_alignment>left</column_alignment>
+    <column_width>150</column_width>
+    <data_type>date</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Modified On</label>
+    <pattern>short_date_time</pattern>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>1152</sort_order>
+    <source_id keyed_name="FRG_ParentPackage" type="ItemType" name="FRG_ParentPackage">CE19FF698B324D81A2F45D6F6946E004</source_id>
+    <track_history>0</track_history>
+    <name>modified_on</name>
+   </Item>
+  </Relationships>
+ </Item>
+ <Item type="View" action="delete" where="source_id='CE19FF698B324D81A2F45D6F6946E004'" />
+ <Item type="Form" action="delete" where="name='FRG_ParentPackage'" />
+</AML>
